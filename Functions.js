@@ -10,7 +10,19 @@ const board = {
     '9': "",
 };
 
+const buttons = document.getElementById("Buttons").children;
+
+const title = document.getElementById("title");
+title.style.opacity = "0";
+title.style.color = "rgb(0, 217, 255)";
+
+let timeAfterRound = 2;
+
 let ended = false;
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function checkWinX(){
     if(board[1] == 'X' && board[2] == 'X' && board[3] == 'X'){
@@ -54,7 +66,7 @@ function checkWinO(){
     return false;
 }
 
-function randomNum(){
+async function randomNum(){
     for (let y in board) {
         if(board[y] == ""){
             break;
@@ -75,18 +87,50 @@ function randomNum(){
         board[x] = 'O';
         if(checkWinO()){
             console.log("game ended");
-            console.log("O won");
+            console.log("O won!");
             ended = true;
+            title.style.opacity = "100";
+            title.innerHTML = "O won!";
+
+            await sleep(timeAfterRound * 1000);
+            for (let x in board){
+                board[x] = "";
+            }
+            for (let y in buttons){
+                buttons[y].innerHTML = "";
+            }
+            ended = false;
+            title.style.opacity = "0";
+            return;
         }
     } else{
         randomNum();
     }
 }
 
-function display(input){
+async function display(input){
     if(board[input] != 'X' && board[input] != 'O' && !ended){
         document.getElementById(input).innerHTML='X';
         board[input] = 'X';
+
+        if(checkWinX()){
+            console.log("game ended");
+            console.log("X won");
+            ended = true;
+            title.style.opacity = "100";
+            title.innerHTML = "X won!";
+            
+            await sleep(timeAfterRound * 1000);
+            for (let x in board){
+                board[x] = "";
+            }
+            for (let y in buttons){
+                buttons[y].innerHTML = "";
+            }
+            ended = false;
+            title.style.opacity = "0";
+            return;
+        }
 
         for (let y in board) {
             if(board[y] == ""){
@@ -98,10 +142,27 @@ function display(input){
                 ended = true;
                 if(checkWinX()){
                     console.log("X won");
+                    title.style.opacity = "100";
+                    title.innerHTML = "X won!";
                 } else if(checkWinO()){
                     console.log("O won");
+                    title.style.opacity = "100";
+                    title.innerHTML = "O won!";
                 } else{
                     console.log("Draw");
+                    title.style.opacity = "100";
+                    title.innerHTML = "Draw!";
+                    
+                    await sleep(timeAfterRound * 1000);
+                    for (let x in board){
+                        board[x] = "";
+                    }
+                    for (let y in buttons){
+                        buttons[y].innerHTML = "";
+                    }
+                    ended = false;
+                    title.style.opacity = "0";
+                    return;
                 }
             }
         }
