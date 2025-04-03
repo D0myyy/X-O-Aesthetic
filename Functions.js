@@ -176,7 +176,7 @@ function sensitiveCases() {
         } else if (x == 4) {
             return 9;
         }
-    } else if (board[5] != 'X') {
+    } else if (board[5] != 'X' && move == 1) {
         return 5;
     }
 
@@ -230,7 +230,36 @@ function sensitiveCases() {
             }
         }
     }
-    return 0;
+
+    // Case 3
+    if (move == 2 && board[5] == 'O' && board[1] == 'X' || board[3] == 'X' || board[7] == 'X' || board[9] == 'X') {
+        let currentXPos = [' '];
+        for (let y in board) {
+            if (board[y] == "X") {
+                if (currentXPos[0] == ' ') {
+                    currentXPos[0] = y;
+                } else {
+                    currentXPos[1] = y;
+                }
+            }
+        }
+        if (currentXPos[0] == 3 && currentXPos[1] == 7 || currentXPos[0] == 1 && currentXPos[1] == 9) {
+            x = Math.floor(Math.random() * 4);
+            while (x == 0) {
+                x = Math.floor(Math.random() * 10);
+            }
+            if (x == 1) {
+                return 2;
+            } else if (x == 2) {
+                return 4;
+            } else if (x == 3) {
+                return 6;
+            } else if (x == 4) {
+                return 8;
+            }
+        }
+        return 0;
+    }
 }
 
 function checkWinX() {
@@ -337,6 +366,35 @@ async function randomNum() {
                 return;
             }
         }
+        return;
+    }
+    x = sensitiveCases();
+    if (move == 2 && x != 0 && board[5] == 'O' && (board[1] == 'X' || board[3] == 'X' || board[7] == 'X' || board[9] == 'X')) {
+        if (x != 0) {
+            console.log(x)
+            document.getElementById(x).innerHTML = 'O';
+            board[x] = 'O';
+            if (checkWinO()) {
+                console.log("game ended");
+                console.log("O won!");
+                ended = true;
+                title.style.opacity = "100";
+                title.innerHTML = "O won!";
+                move = 0;
+
+                await sleep(timeAfterRound * 1000);
+                for (let x in board) {
+                    board[x] = "";
+                }
+                for (let y in buttons) {
+                    buttons[y].innerHTML = "";
+                }
+                ended = false;
+                title.style.opacity = "0";
+                return;
+            }
+        }
+        return;
     } else {
         x = if3Win();
         if (x != 0) {
