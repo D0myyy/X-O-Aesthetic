@@ -177,11 +177,12 @@ function sensitiveCases() {
             return 9;
         }
     } else if (board[5] != 'X' && move == 1) {
+        console.log("prosta mijloc")
         return 5;
     }
 
     // Case 2
-    if (move == 2 && board[5] == 'X') {
+    if (move == 2 && board[5] == 'X' && board[1] == 'X' || board[3] == 'X' || board[7] == 'X' || board[9] == 'X') {
         let currentXPos = [];
         for (let y in board) {
             if (board[y] == "X" && y != 5) {
@@ -258,8 +259,8 @@ function sensitiveCases() {
                 return 8;
             }
         }
-        return 0;
     }
+    return 0;
 }
 
 function checkWinX() {
@@ -340,7 +341,6 @@ async function randomNum() {
         }
         return;
     }
-    x = sensitiveCases();
     if (move == 2 && x != 0 && board[5] == 'X') {
         if (x != 0) {
             console.log(x)
@@ -368,7 +368,6 @@ async function randomNum() {
         }
         return;
     }
-    x = sensitiveCases();
     if (move == 2 && x != 0 && board[5] == 'O' && (board[1] == 'X' || board[3] == 'X' || board[7] == 'X' || board[9] == 'X')) {
         if (x != 0) {
             console.log(x)
