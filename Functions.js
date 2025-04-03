@@ -165,7 +165,7 @@ function sensitiveCases() {
     if (board[5] == 'X' && move == 1) {
         x = Math.floor(Math.random() * 4);
         while (x == 0) {
-            x = Math.floor(Math.random() * 10);
+            x = Math.floor(Math.random() * 4);
         }
         if (x == 1) {
             return 1;
@@ -177,7 +177,6 @@ function sensitiveCases() {
             return 9;
         }
     } else if (board[5] != 'X' && move == 1) {
-        console.log("prosta mijloc")
         return 5;
     }
 
@@ -192,7 +191,7 @@ function sensitiveCases() {
         if (currentXPos[0] == 1 && board[9] == 'O') {
             x = Math.floor(Math.random() * 2);
             while (x == 0) {
-                x = Math.floor(Math.random() * 10);
+                x = Math.floor(Math.random() * 2);
             }
             if (x == 1) {
                 return 3;
@@ -202,7 +201,7 @@ function sensitiveCases() {
         } else if (currentXPos[0] == 3 && board[7] == 'O') {
             x = Math.floor(Math.random() * 2);
             while (x == 0) {
-                x = Math.floor(Math.random() * 10);
+                x = Math.floor(Math.random() * 2);
             }
             if (x == 1) {
                 return 1;
@@ -212,7 +211,7 @@ function sensitiveCases() {
         } else if (currentXPos[0] == 7 && board[3] == 'O') {
             x = Math.floor(Math.random() * 2);
             while (x == 0) {
-                x = Math.floor(Math.random() * 10);
+                x = Math.floor(Math.random() * 2);
             }
             if (x == 1) {
                 return 1;
@@ -222,7 +221,7 @@ function sensitiveCases() {
         } else if (currentXPos[0] == 9 && board[1] == 'O') {
             x = Math.floor(Math.random() * 2);
             while (x == 0) {
-                x = Math.floor(Math.random() * 10);
+                x = Math.floor(Math.random() * 2);
             }
             if (x == 1) {
                 return 3;
@@ -247,7 +246,7 @@ function sensitiveCases() {
         if (currentXPos[0] == 3 && currentXPos[1] == 7 || currentXPos[0] == 1 && currentXPos[1] == 9) {
             x = Math.floor(Math.random() * 4);
             while (x == 0) {
-                x = Math.floor(Math.random() * 10);
+                x = Math.floor(Math.random() * 4);
             }
             if (x == 1) {
                 return 2;
