@@ -163,9 +163,9 @@ function if3Block() {
 function sensitiveCases() {
     // Case 1
     if (board[5] == 'X' && move == 1) {
-        x = Math.floor(Math.random() * 4);
+        x = Math.floor(Math.random() * 5);
         while (x == 0) {
-            x = Math.floor(Math.random() * 4);
+            x = Math.floor(Math.random() * 5);
         }
         if (x == 1) {
             return 1;
@@ -189,9 +189,9 @@ function sensitiveCases() {
             }
         }
         if (currentXPos[0] == 1 && board[9] == 'O') {
-            x = Math.floor(Math.random() * 2);
+            x = Math.floor(Math.random() * 3);
             while (x == 0) {
-                x = Math.floor(Math.random() * 2);
+                x = Math.floor(Math.random() * 3);
             }
             if (x == 1) {
                 return 3;
@@ -199,9 +199,9 @@ function sensitiveCases() {
                 return 7;
             }
         } else if (currentXPos[0] == 3 && board[7] == 'O') {
-            x = Math.floor(Math.random() * 2);
+            x = Math.floor(Math.random() * 3);
             while (x == 0) {
-                x = Math.floor(Math.random() * 2);
+                x = Math.floor(Math.random() * 3);
             }
             if (x == 1) {
                 return 1;
@@ -209,9 +209,9 @@ function sensitiveCases() {
                 return 9;
             }
         } else if (currentXPos[0] == 7 && board[3] == 'O') {
-            x = Math.floor(Math.random() * 2);
+            x = Math.floor(Math.random() * 3);
             while (x == 0) {
-                x = Math.floor(Math.random() * 2);
+                x = Math.floor(Math.random() * 3);
             }
             if (x == 1) {
                 return 1;
@@ -219,9 +219,9 @@ function sensitiveCases() {
                 return 9;
             }
         } else if (currentXPos[0] == 9 && board[1] == 'O') {
-            x = Math.floor(Math.random() * 2);
+            x = Math.floor(Math.random() * 3);
             while (x == 0) {
-                x = Math.floor(Math.random() * 2);
+                x = Math.floor(Math.random() * 3);
             }
             if (x == 1) {
                 return 3;
@@ -244,9 +244,9 @@ function sensitiveCases() {
             }
         }
         if (currentXPos[0] == 3 && currentXPos[1] == 7 || currentXPos[0] == 1 && currentXPos[1] == 9) {
-            x = Math.floor(Math.random() * 4);
+            x = Math.floor(Math.random() * 5);
             while (x == 0) {
-                x = Math.floor(Math.random() * 4);
+                x = Math.floor(Math.random() * 5);
             }
             if (x == 1) {
                 return 2;
@@ -259,6 +259,30 @@ function sensitiveCases() {
             }
         }
     }
+
+    // Case 4
+    if (move == 2 && board[5] == 'O' && board[2] == 'X' || board[4] == 'X' || board[6] == 'X' || board[8] == 'X') {
+        let currentXPos = [' '];
+        for (let y in board) {
+            if (board[y] == "X") {
+                if (currentXPos[0] == ' ') {
+                    currentXPos[0] = y;
+                } else {
+                    currentXPos[1] = y;
+                }
+            }
+        }
+        if (currentXPos[0] == 2 && currentXPos[1] == 4) {
+            return 1;
+        } else if (currentXPos[0] == 2 && currentXPos[1] == 6) {
+            return 3;
+        } else if (currentXPos[0] == 4 && currentXPos[1] == 8) {
+            return 7;
+        } else if (currentXPos[0] == 6 && currentXPos[1] == 8) {
+            return 9;
+        }
+    }
+
     return 0;
 }
 
@@ -393,6 +417,32 @@ async function randomNum() {
             }
         }
         return;
+    }
+    if(move == 2 && board[5] == 'O' && (board[2] == 'X' && board[4] == 'X' || board[2] == 'X' && board[6] == 'X' || board[4] == 'X' && board[8] == 'X'  || board[6] == 'X' && board[8] == 'X')){
+        if (x != 0) {
+            console.log(x)
+            document.getElementById(x).innerHTML = 'O';
+            board[x] = 'O';
+            if (checkWinO()) {
+                console.log("game ended");
+                console.log("O won!");
+                ended = true;
+                title.style.opacity = "100";
+                title.innerHTML = "O won!";
+                move = 0;
+
+                await sleep(timeAfterRound * 1000);
+                for (let x in board) {
+                    board[x] = "";
+                }
+                for (let y in buttons) {
+                    buttons[y].innerHTML = "";
+                }
+                ended = false;
+                title.style.opacity = "0";
+                return;
+            }
+        }
     } else {
         x = if3Win();
         if (x != 0) {
@@ -419,7 +469,6 @@ async function randomNum() {
                 return;
             }
         } else {
-
             x = if3Block();
             if (x != 0) {
                 console.log(x)
