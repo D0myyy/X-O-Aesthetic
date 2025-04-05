@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25, user-scalable=no">
+    <link rel="stylesheet" href="styles.css">
+    <title>X & O | Aesthetic</title>
+</head>
+
+<body>
+    <div id="Main">
+
+        <div id="funcButtons">
+            <button id="PlayAsX">As X</button>
+            <button onclick="resetScore()" id="ResetButton"> Reset </button>
+            <button id="PlayAsO"> As O </button>
+        </div>
+        <div id="PlayMP">
+            <button onclick="PVPorPVE()" id="PVPButton">Player vs Player </button>
+        </div>
+        <div id="Score">
+            <h1 id="ScoreBoard">Wins: 0 / Draws: 0 / Losses: 0</h1>
+        </div>
+
+        <div id="MainFrame">
+            <div>
+                <H1 id="title">X won!</H1>
+            </div>
+            <div id="Buttons">
+                <button onclick="display('1')" id="1"></button>
+                <button onclick="display('2')" id="2"></button>
+                <button onclick="display('3')" id="3"></button>
+                <button onclick="display('4')" id="4"></button>
+                <button onclick="display('5')" id="5"></button>
+                <button onclick="display('6')" id="6"></button>
+                <button onclick="display('7')" id="7"></button>
+                <button onclick="display('8')" id="8"></button>
+                <button onclick="display('9')" id="9"></button>
+            </div>
+        </div>
+        <img src="images/background.jpg" alt="background">
+    </div>
+    <script src="Functions.js"></script>
+</body>
+
+</html>
