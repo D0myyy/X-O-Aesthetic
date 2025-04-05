@@ -283,6 +283,37 @@ function sensitiveCases() {
         }
     }
 
+    // Case 5
+    if (move == 2 && board[5] == 'O' && (board[2] == 'X' && board[7] == 'X' || board[2] == 'X' && board[9] == 'X' || board[4] == 'X' && board[3] == 'X' || board[4] == 'X' && board[9] == 'X' || board[6] == 'X' && board[1] == 'X' || board[6] == 'X' && board[7] == 'X' || board[8] == 'X' && board[1] == 'X' || board[8] == 'X' && board[3] == 'X')) {
+        let currentXPos = [' '];
+        for (let y in board) {
+            if (board[y] == "X") {
+                if (currentXPos[0] == ' ') {
+                    currentXPos[0] = y;
+                } else {
+                    currentXPos[1] = y;
+                }
+            }
+        }
+        if (currentXPos[0] == 2 && currentXPos[1] == 7) {
+            return 1;
+        } else if (currentXPos[0] == 2 && currentXPos[1] == 9) {
+            return 3;
+        } else if (currentXPos[0] == 3 && currentXPos[1] == 4) {
+            return 1;
+        } else if (currentXPos[0] == 4 && currentXPos[1] == 9) {
+            return 7;
+        } else if (currentXPos[0] == 1 && currentXPos[1] == 6) {
+            return 3;
+        } else if (currentXPos[0] == 6 && currentXPos[1] == 7) {
+            return 9;
+        } else if (currentXPos[0] == 1 && currentXPos[1] == 8) {
+            return 7;
+        } else if (currentXPos[0] == 3 && currentXPos[1] == 8) {
+            return 9;
+        }
+    }
+
     return 0;
 }
 
@@ -418,7 +449,7 @@ async function randomNum() {
         }
         return;
     }
-    if(move == 2 && board[5] == 'O' && (board[2] == 'X' && board[4] == 'X' || board[2] == 'X' && board[6] == 'X' || board[4] == 'X' && board[8] == 'X'  || board[6] == 'X' && board[8] == 'X')){
+    if (move == 2 && board[5] == 'O' && (board[2] == 'X' && board[4] == 'X' || board[2] == 'X' && board[6] == 'X' || board[4] == 'X' && board[8] == 'X' || board[6] == 'X' && board[8] == 'X')) {
         if (x != 0) {
             console.log(x)
             document.getElementById(x).innerHTML = 'O';
